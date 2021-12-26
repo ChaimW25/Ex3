@@ -1,6 +1,6 @@
 import json
 from typing import List
-
+import queue
 from GraphAlgoInterface import GraphAlgoInterface
 from GraphInterface import GraphInterface
 from DiGraph import DiGraph
@@ -72,3 +72,35 @@ class GraphAlgo(GraphAlgoInterface):
 
     def plot_graph(self) -> None:
         pass
+
+    def dijkstra(self, src: int, dest: int):
+        self.initTIW()
+        q = queue.PriorityQueue()
+        srcNode: Node = self.graph.get_all_v().get(src)
+        srcNode.setWeight(0)
+        q.put(srcNode)
+
+        while not q.empty():
+            u: Node = q.get()
+            if u.getInfo() is None:
+                u.setInfo("V")
+                if u.getId() == dest:
+                    return
+                for outEdge, edgeWeight in self.graph.all_out_edges_of_node(u.getId()).items():
+                    tempNode: Node = self.graph.get_all_v().get(outEdge)
+                    if tempNode.getInfo() is None:
+                        w: float = edgeWeight + u.getWeight()
+                        if tempNode.getWeight() != -1:
+                            if w < tempNode.getWeight():
+                                tempNode.setWeight(w)
+                                tempNode.setTag(u.getId())
+                        else:
+                            tempNode.setWeight(w)
+                            tempNode.setTag(u.getId())
+                    q.put(tempNode)
+
+    def initTIW(self):
+        for node in self.graph.get_all_v().values():
+            node.setTag(-1)
+            node.setInfo(None)
+            node.setWeight(-1)

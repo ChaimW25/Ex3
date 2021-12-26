@@ -34,6 +34,9 @@ class Node:
     def setTag(self, tag: int):
         self.tag = tag
 
+    def __lt__(self, node):
+        return self.weight < node.weight
+
     def __str__(self) -> str:
         return "{key: " + str(self.id) + ", " + "pos: " + str(self.pos) + "}"
 
