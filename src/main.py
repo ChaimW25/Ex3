@@ -53,11 +53,11 @@ def check1():
     :return:
     """
     g_algo = GraphAlgo()  # init an empty graph - for the GraphAlgo
-    file = "../data/T0.json"
+    file = "../data/A5.json"
     g_algo.load_from_json(file)  # init a GraphAlgo from a json file
-    print(g_algo.shortest_path(0, 3))
-    print(g_algo.shortest_path(3, 1))
-    print(g_algo.centerPoint())
+    # print(g_algo.shortest_path(0, 3))
+    # print(g_algo.shortest_path(3, 1))
+    # print(g_algo.centerPoint())
     g_algo.save_to_json(file + '_saved')
     g_algo.plot_graph()
 
@@ -105,4 +105,4 @@ def check3():
 
 
 if __name__ == '__main__':
-    check0()
+    check1()
