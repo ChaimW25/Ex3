@@ -4,6 +4,7 @@ from typing import List
 from GraphAlgoInterface import GraphAlgoInterface
 from GraphInterface import GraphInterface
 from DiGraph import DiGraph
+import matplotlib.pyplot as plt
 from Node import Node
 
 
@@ -70,5 +71,27 @@ class GraphAlgo(GraphAlgoInterface):
     def centerPoint(self) -> (int, float):
         super().centerPoint()
 
+    # def plot_graph(self) -> None:
+    #     pass
+
     def plot_graph(self) -> None:
-        pass
+        x = []
+        y = []
+        for node in self.get_graph().get_all_v().values():
+            x.append(node.getPos()[0])
+            y.append(node.getPos()[1])
+        #define a default color for the nodes
+        plt.plot(x, y, 'bo')
+        for i in range(len(x)):
+            #place the nodes id near the nodes in the graph
+            plt.annotate(i, xy=(x[i] * 0.999992, y[i] * 1.000007))
+        for nodeId in self.get_graph().get_all_v().keys():
+            if (self.get_graph().all_out_edges_of_node(nodeId) is not None):
+                for edge in self.get_graph().all_out_edges_of_node(nodeId).keys():
+                    xDest = self.get_graph().get_all_v().get(edge).getPos()[0]
+                    yDest = self.get_graph().get_all_v().get(edge).getPos()[1]
+                    xSrc = self.get_graph().get_all_v().get(nodeId).getPos()[0]
+                    ySrc = self.get_graph().get_all_v().get(nodeId).getPos()[1]
+                    #paint the arrows
+                    plt.annotate("", xy=(xSrc, ySrc), xytext=(xDest, yDest), arrowprops={'arrowstyle': "<|-", 'lw': 1})
+        plt.show()
