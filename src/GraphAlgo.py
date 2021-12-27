@@ -1,4 +1,5 @@
 import json
+import math
 from typing import List
 import queue
 from GraphAlgoInterface import GraphAlgoInterface
@@ -63,16 +64,69 @@ class GraphAlgo(GraphAlgoInterface):
             return False
 
     def shortest_path(self, id1: int, id2: int) -> (float, list):
-        pass
+
+        shortestPath: list = []
+        if (id1 not in self.graph.get_all_v().keys()) or (id2 not in self.graph.get_all_v().keys()):
+            return math.inf, None
+
+        elif id1 == id2:
+            shortestPath.append(id1)
+            return 0, shortestPath
+
+        self.dijkstra(id1, id2)
+        temp: int = id2
+        shortestPath.append(id2)
+        while temp != id1:
+            temp = self.graph.get_all_v().get(temp).getTag()
+            shortestPath.append(temp)
+
+        shortestPath.reverse()
+        shortestPathDist: float = self.graph.get_all_v().get(id2).getWeight()
+        return shortestPathDist, shortestPath
 
     def TSP(self, node_lst: List[int]) -> (List[int], float):
-        super().TSP(node_lst)
+        tsp: list = []
+        tempNode: int = node_lst.pop(0)
+        tsp.append(tempNode)
+        citiesSet: set = set(node_lst)
+        distTSP: float = 0
+        nodeToAdd: int = -1
+        minDist: float = math.inf
+
+        while len(citiesSet) > 0:
+            listToAdd: list = []
+            for node in citiesSet:
+                tempDist, shortestPath = self.shortest_path(tempNode, node)
+                shortestPath.pop(0)
+                if tempDist < minDist:
+                    minDist = tempDist
+                    listToAdd = shortestPath
+                    nodeToAdd = shortestPath[len(shortestPath) - 1]
+
+            distTSP += minDist
+            tsp = tsp + listToAdd
+            citiesSet.remove(nodeToAdd)
+            tempNode = nodeToAdd
+
+        return tsp, distTSP
 
     def centerPoint(self) -> (int, float):
-        super().centerPoint()
 
-    # def plot_graph(self) -> None:
-    #     pass
+        center: int = -1
+        minWeight: float = math.inf
+
+        for node in self.graph.get_all_v().values():
+            self.dijkstra(node.getId(), -1)
+            maxWeight: float = 0
+            for secondNode in self.graph.get_all_v().values():
+                if secondNode.getWeight() > maxWeight:
+                    maxWeight = secondNode.getWeight()
+
+            if maxWeight < minWeight:
+                minWeight = maxWeight
+                center = node.getId()
+
+        return center, minWeight
 
     def plot_graph(self) -> None:
         x = []
@@ -80,19 +134,19 @@ class GraphAlgo(GraphAlgoInterface):
         for node in self.get_graph().get_all_v().values():
             x.append(node.getPos()[0])
             y.append(node.getPos()[1])
-        #define a default color for the nodes
+        # define a default color for the nodes
         plt.plot(x, y, 'bo')
         for i in range(len(x)):
-            #place the nodes id near the nodes in the graph
+            # place the nodes id near the nodes in the graph
             plt.annotate(i, xy=(x[i] * 0.999992, y[i] * 1.000007))
         for nodeId in self.get_graph().get_all_v().keys():
-            if (self.get_graph().all_out_edges_of_node(nodeId) is not None):
+            if self.get_graph().all_out_edges_of_node(nodeId) is not None:
                 for edge in self.get_graph().all_out_edges_of_node(nodeId).keys():
                     xDest = self.get_graph().get_all_v().get(edge).getPos()[0]
                     yDest = self.get_graph().get_all_v().get(edge).getPos()[1]
                     xSrc = self.get_graph().get_all_v().get(nodeId).getPos()[0]
                     ySrc = self.get_graph().get_all_v().get(nodeId).getPos()[1]
-                    #paint the arrows
+                    # paint the arrows
                     plt.annotate("", xy=(xSrc, ySrc), xytext=(xDest, yDest), arrowprops={'arrowstyle': "<|-", 'lw': 1})
         plt.show()
 
@@ -113,11 +167,7 @@ class GraphAlgo(GraphAlgoInterface):
                     tempNode: Node = self.graph.get_all_v().get(outEdge)
                     if tempNode.getInfo() is None:
                         w: float = edgeWeight + u.getWeight()
-                        if tempNode.getWeight() != -1:
-                            if w < tempNode.getWeight():
-                                tempNode.setWeight(w)
-                                tempNode.setTag(u.getId())
-                        else:
+                        if w < tempNode.getWeight():
                             tempNode.setWeight(w)
                             tempNode.setTag(u.getId())
                     q.put(tempNode)
@@ -126,4 +176,4 @@ class GraphAlgo(GraphAlgoInterface):
         for node in self.graph.get_all_v().values():
             node.setTag(-1)
             node.setInfo(None)
-            node.setWeight(-1)
+            node.setWeight(math.inf)

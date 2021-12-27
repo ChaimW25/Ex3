@@ -25,16 +25,84 @@ class TestGraphAlgo(TestCase):
         self.fail()
 
     def test_shortest_path(self):
-        self.fail()
+        g = self.simple_graph_generate()
+        ga = GraphAlgo(g)
+        expected_lst = [1, 2, 3, 7]
+        self.assertEqual((3.0, expected_lst), ga.shortest_path(1, 7))
+        self.assertEqual((float("inf"), None), ga.shortest_path(1, 88))
+        expected_lst = [3, 7, 8, 9]
+        self.assertEqual((9, expected_lst), ga.shortest_path(3, 9))
 
     def test_tsp(self):
-        self.fail()
+        g = self.simple_graph_generate()
+        ga = GraphAlgo(g)
+        self.assertEqual(([1, 2, 8], 1.5), ga.TSP([1, 8]))
+        self.assertEqual(([7,8,9,1], 12), ga.TSP([7, 1]))
 
     def test_center_point(self):
-        self.fail()
+        # test center of A0.json:
+        file = '../data/A0.json'
+        graphAlgo = GraphAlgo()
+        self.assertTrue(graphAlgo.load_from_json(file))
+        self.assertEqual((7, 6.806805834715163), graphAlgo.centerPoint())
+
+        # test center of A1.json:
+        file = '../data/A1.json'
+        graphAlgo = GraphAlgo()
+        self.assertTrue(graphAlgo.load_from_json(file))
+        self.assertEqual((8, 9.925289024973141), graphAlgo.centerPoint())
+
+        # test center of A2.json:
+        file = '../data/A2.json'
+        graphAlgo = GraphAlgo()
+        self.assertTrue(graphAlgo.load_from_json(file))
+        self.assertEqual((0, 7.819910602212574), graphAlgo.centerPoint())
+
+        # test center of A3.json:
+        file = '../data/A3.json'
+        graphAlgo = GraphAlgo()
+        self.assertTrue(graphAlgo.load_from_json(file))
+        self.assertEqual((2, 8.182236568942237), graphAlgo.centerPoint())
+
+        # test center of A4.json:
+        file = '../data/A4.json'
+        graphAlgo = GraphAlgo()
+        self.assertTrue(graphAlgo.load_from_json(file))
+        self.assertEqual((6, 8.071366078651435), graphAlgo.centerPoint())
+
+        # test center of A5.json:
+        file = '../data/A5.json'
+        graphAlgo = GraphAlgo()
+        self.assertTrue(graphAlgo.load_from_json(file))
+        self.assertEqual((40, 9.291743173960954), graphAlgo.centerPoint())
 
     def test_plot_graph(self):
         self.fail()
+
+    @staticmethod
+    def simple_graph_generate():
+        """
+        DiGraph: |V| = 10	|E| = 16
+        {0: (0), 1: (1), 2: (2), 3: (3), 4: (4), 5: (5), 6: (6), 7: (7), 8: (8), 9: (9)}
+        Edge Data:
+        (1) -> {9: 0.5, 2: 0.5}
+        (2) -> {8: 1.0, 3: 1.0}
+        (3) -> {7: 1.5, 4: 1.5}
+        (4) -> {6: 2.0, 5: 2.0}
+        (5) -> {6: 2.5}
+        (6) -> {4: 3.0, 7: 3.0}
+        (7) -> {3: 3.5, 8: 3.5}
+        (8) -> {2: 4.0, 9: 4.0}
+        (9) -> {1: 4.5}
+        https://user-images.githubusercontent.com/73063199/103218639-3a423580-4924-11eb-8316-f438c2846570.png      """
+        g = DiGraph()
+        for i in range(10):
+            g.add_node(i)
+
+        for i in range(10):
+            g.add_edge(i, 10 - i, i * 0.5)
+            g.add_edge(i, i + 1, i * 0.5)
+        return g
 
 
 if __name__ == '__main__':

@@ -1,9 +1,12 @@
+import math
+
+
 class Node:
 
     def __init__(self, id: int, pos: tuple = None):
         self.pos = pos
         self.id = id
-        self.weight: float = 0
+        self.weight: float = math.inf
         self.tag: int = 0
         self.info: str = ""
 
