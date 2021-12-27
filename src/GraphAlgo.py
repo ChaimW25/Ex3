@@ -67,7 +67,7 @@ class GraphAlgo(GraphAlgoInterface):
 
         shortestPath: list = []
         if (id1 not in self.graph.get_all_v().keys()) or (id2 not in self.graph.get_all_v().keys()):
-            return math.inf, None
+            return math.inf, []
 
         elif id1 == id2:
             shortestPath.append(id1)
@@ -79,6 +79,8 @@ class GraphAlgo(GraphAlgoInterface):
         while temp != id1:
             temp = self.graph.get_all_v().get(temp).getTag()
             shortestPath.append(temp)
+            if temp == -1:
+                return math.inf, []
 
         shortestPath.reverse()
         shortestPathDist: float = self.graph.get_all_v().get(id2).getWeight()
@@ -101,7 +103,7 @@ class GraphAlgo(GraphAlgoInterface):
                 if tempDist < minDist:
                     minDist = tempDist
                     listToAdd = shortestPath
-                    nodeToAdd = shortestPath[len(shortestPath) - 1]
+                    nodeToAdd = node
 
             distTSP += minDist
             tsp = tsp + listToAdd
