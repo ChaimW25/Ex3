@@ -99,6 +99,6 @@ class DiGraph(GraphInterface):
     #            f" nodes: {self.Nodes}, edges: {self.outEdges}, in edges: {self.inEdges}"
 
     def __repr__(self):
-        return '|V|={}, |E|={}'.format(self.nodesCounter, self.edgesCounter)
+        return 'Graph: |V|={}, |E|={}'.format(self.nodesCounter, self.edgesCounter)
 
 
