@@ -29,3 +29,19 @@ That's why most of our hard work will be converting the old project in Java to P
 As expected, the run times of our algorithm in Java were better than the run times in Python as we detailed in time trials and graphs on our wiki page which you can watch in this link:
 https://github.com/ChaimW25/Ex3/wiki/Performances-report
 
+## How to run the program?
+Before Running this project, install the above package:matplotlib Version 3.4.3.
+
+Then, go to the 'main' class and create one of the objects: 'DiGraph', 'GraphAlgo' and use their methods.
+You can add as many nodes and edges as you like and run the algorithms on them, Or alternatively, load an existing graph from the json files.
+
+If you want to display the graph on the screen: create GraphAlgo object and call the 'plot_graph' method.
+
+An example for displaying a graph in the program in a few steps:
+ 
+1. g_algo = GraphAlgo()
+2. file = '../data/A0.json' (enter a json file you would like to load)
+3. g_algo.load_from_json(file)
+4. g_algo.plot_graph
+
+
