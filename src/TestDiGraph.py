@@ -51,24 +51,14 @@ class TestDiGraph(TestCase):
 
     def test_add_edge(self):
         g = DiGraph()
-        edgeSize = g.e_size
         for i in range(10):
             g.add_node(i)
 
-        # for i in range(10):
-        #     g.add_edge(i, i - 2, -i)
-        # Check Un positive numbers
-        # self.assertEqual(g.e_size(), edgeSize)
+        for i in range(3,8):
+            g.add_edge(i, i + 2, i)
 
-        # for i in range(10):
-        #     g.add_edge(i, i - 2, i)
-        #     # Check Un positive numbers
-        # self.assertNotEqual(g.e_size, edgeSize)
-        # edgeSize = g.e_size
+        self.assertEqual(5, g.e_size())
 
-        for i in range(10):
-            g.add_edge(i, i - 2, i)
-        # self.assertNotEqual(g.edge_size, edgeSize)
 
     def test_add_node(self):
         g = DiGraph()
