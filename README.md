@@ -8,6 +8,12 @@ An important detail about this project is the fact that we have already done mos
 
 That's why most of our hard work will be converting the old project in Java to Python language. It is important to remember that although the languages are similar, they are different, for example, we changed the uses in hasmap to dictionary. In addition The difference between the languages made us design the project differently and in a different structure, for example, We did not have to create a class of 'Edge'. We used the interfaces 'GraphInterface' and 'GraphAlgoInterface' as skeleton to our project and create their implementations in the classes 'DiGraph' and 'GraphAlgo', the class'Node' help us to implement the other classes. In addition, we created 2 tests classes: 'TestDiGraph', 'TestGraphAlgo'.
 
+## UML of our project:
+
+![uml_page-0001](https://user-images.githubusercontent.com/74601548/147591459-30266ba7-393e-4d8e-b291-7ab5805a3a45.jpg)
+
+
+
 ## Introducing our json file graphs:
 
 ![graphs_page-0001](https://user-images.githubusercontent.com/74601548/147591292-38956503-1638-4131-9616-ecca33806a6b.jpg)
@@ -18,8 +24,8 @@ That's why most of our hard work will be converting the old project in Java to P
 
 ![graphs_page-0004](https://user-images.githubusercontent.com/74601548/147591314-f992b2ff-0775-4637-8770-6e7732d200a0.jpg)
 
-## UML of our project:
+## Our algorithm Performances:
 
-![uml_page-0001](https://user-images.githubusercontent.com/74601548/147591459-30266ba7-393e-4d8e-b291-7ab5805a3a45.jpg)
-
+As expected, the run times of our algorithm in Java were better than the run times in Python as we detailed in time trials and graphs on our wiki page which you can watch in this link:
+https://github.com/ChaimW25/Ex3/wiki/Performances-report
 
