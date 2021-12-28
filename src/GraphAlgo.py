@@ -7,6 +7,7 @@ from GraphInterface import GraphInterface
 from DiGraph import DiGraph
 import matplotlib.pyplot as plt
 from Node import Node
+import random
 
 
 class GraphAlgo(GraphAlgoInterface):
@@ -29,7 +30,9 @@ class GraphAlgo(GraphAlgoInterface):
                         pos = (float(str_lst[0]), float(str_lst[1]))
                         g.add_node(i['id'], pos)
                     else:
-                        g.add_node(i['id'])
+                        pos=(random.randint(35185,35215)/1000, random.randint(32101,32108)/1000)
+                       # pos=(random.randint(0,10000)/1000, random.randint(0,10000)/1000)
+                        g.add_node(i['id'], pos)
                 for i in data['Edges']:
                     g.add_edge(i['src'], i['dest'], i['w'])
                 self.graph = g
@@ -137,13 +140,22 @@ class GraphAlgo(GraphAlgoInterface):
         x = []
         y = []
         for node in self.get_graph().get_all_v().values():
-            x.append(node.getPos()[0])
-            y.append(node.getPos()[1])
-        # define a default color for the nodes
+            if node.getPos() is not None:
+                x.append(node.getPos()[0])
+                y.append(node.getPos()[1])
+            else:
+                pos = (random.randint(35185, 35215) / 1000, random.randint(32101, 32108) / 1000)
+                # pos=(random.randint(0,10000)/1000, random.randint(0,10000)/1000)
+                x.append(pos[0])
+                y.append(pos[1])
+                newPos= (pos[0], pos[1], 0.0)
+                node.setPos(newPos)
+        # define a default color for the nodes and paint them
         plt.plot(x, y, 'bo')
         for i in range(len(x)):
-            # place the nodes id near the nodes in the graph
+            # paint the nodes id near the nodes in the graph
             plt.annotate(i, xy=(x[i] * 0.999992, y[i] * 1.000007))
+        #paint the edges
         for nodeId in self.get_graph().get_all_v().keys():
             if self.get_graph().all_out_edges_of_node(nodeId) is not None:
                 for edge in self.get_graph().all_out_edges_of_node(nodeId).keys():
