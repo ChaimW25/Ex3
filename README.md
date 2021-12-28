@@ -10,7 +10,6 @@ That's why most of our hard work will be converting the old project in Java to P
 
 ## UML of our project:
 
-![uml_page-0001](https://user-images.githubusercontent.com/74601548/147591459-30266ba7-393e-4d8e-b291-7ab5805a3a45.jpg)
 
 ![image](https://user-images.githubusercontent.com/74601548/147594743-27545377-6c2b-40a7-925b-b8ecdcea6214.png)
 
