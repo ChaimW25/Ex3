@@ -18,4 +18,8 @@ That's why most of our hard work will be converting the old project in Java to P
 
 ![graphs_page-0004](https://user-images.githubusercontent.com/74601548/147591314-f992b2ff-0775-4637-8770-6e7732d200a0.jpg)
 
+## UML of our project:
+
+![uml_page-0001](https://user-images.githubusercontent.com/74601548/147591459-30266ba7-393e-4d8e-b291-7ab5805a3a45.jpg)
+
 
