@@ -36,7 +36,9 @@ class DiGraph(GraphInterface):
                 self.Nodes.__contains__(id2) and id1 != id2 and \
                 not self.outEdges[id1].__contains__(id2):
             self.outEdges[id1][id2] = weight
+            self.get_all_v().get(id1).addEdgeOut()
             self.inEdges[id2][id1] = weight
+            self.get_all_v().get(id2).addEdgeIn()
             self.edgesCounter += 1
             self.mcCounter += 1
             return True
@@ -84,12 +86,19 @@ class DiGraph(GraphInterface):
 
         if self.outEdges[node_id1].__contains__(node_id2):
             self.outEdges[node_id1].pop(node_id2)
+            self.get_all_v().get(node_id1).removeEdgeOut()
             self.inEdges[node_id2].pop(node_id1)
+            self.get_all_v().get(node_id2).removeEdgeIn()
             self.edgesCounter -= 1
             self.mcCounter += 1
             return True
         return False
+    #
+    # def __str__(self):
+    #     return f"num of nodes: {self.nodesCounter}, num of edges: {self.edgesCounter}, mc: {self.mcCounter}," \
+    #            f" nodes: {self.Nodes}, edges: {self.outEdges}, in edges: {self.inEdges}"
 
-    def __str__(self):
-        return f"num of nodes: {self.nodesCounter}, num of edges: {self.edgesCounter}, mc: {self.mcCounter}," \
-               f" nodes: {self.Nodes}, edges: {self.outEdges}, in edges: {self.inEdges}"
+    def __repr__(self):
+        return '|V|={}, |E|={}'.format(self.nodesCounter, self.edgesCounter)
+
+
