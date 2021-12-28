@@ -38,6 +38,7 @@ class TestGraphAlgo(TestCase):
         ga = GraphAlgo(g)
         self.assertEqual(([1, 2, 8], 1.5), ga.TSP([1, 8]))
         self.assertEqual(([7,8,9,1], 12), ga.TSP([7, 1]))
+        self.assertEqual(([7,3,4,6,7,8,9,1], 22), ga.TSP([7, 1, 4, 9]))
 
     def test_center_point(self):
         # test center of A0.json:

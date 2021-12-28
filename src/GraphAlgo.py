@@ -97,6 +97,7 @@ class GraphAlgo(GraphAlgoInterface):
 
         while len(citiesSet) > 0:
             listToAdd: list = []
+            minDist = math.inf
             for node in citiesSet:
                 tempDist, shortestPath = self.shortest_path(tempNode, node)
                 shortestPath.pop(0)
@@ -121,6 +122,8 @@ class GraphAlgo(GraphAlgoInterface):
             self.dijkstra(node.getId(), -1)
             maxWeight: float = 0
             for secondNode in self.graph.get_all_v().values():
+                if secondNode.getWeight() == math.inf:
+                    return None, math.inf
                 if secondNode.getWeight() > maxWeight:
                     maxWeight = secondNode.getWeight()
 
