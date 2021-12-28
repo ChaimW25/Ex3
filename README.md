@@ -1,5 +1,9 @@
 #  EX3 - OOP COURSE
 # Directed Weighted Graph in Python
+
+![גרף יפה](https://user-images.githubusercontent.com/74601548/147597078-12602deb-223a-4849-b3b8-9418eafdeb60.png)
+
+
 ## Introduction
 In this assigment, we asked to convert the graph implementation we did in Java to Python. We will also finally be required to compare the performance of the program we wrote in Java with the performance of the program we will write in Python. In this task we implemented interfaces that creates a Directed Weighted Graph build from nodes and edges, later, we implemented algorithms class which run algorithms on the graph and then used matplotlib library to present our code in a graphic way.
  
