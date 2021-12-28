@@ -24,7 +24,7 @@ That's why most of our hard work will be converting the old project in Java to P
 
 ![graphs_page-0003](https://user-images.githubusercontent.com/74601548/147591307-4024884b-1566-4e17-b708-06ca050cb119.jpg)
 
-![graphs_page-0004](https://user-images.githubusercontent.com/74601548/147591314-f992b2ff-0775-4637-8770-6e7732d200a0.jpg)
+![image](https://user-images.githubusercontent.com/74601548/147594841-6732da90-8f06-437d-a5c8-bcede5b08937.png)
 
 ## Our algorithm Performances:
 
